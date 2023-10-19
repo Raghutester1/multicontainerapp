@@ -1,0 +1,7 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: node-conf
+data:
+  server-uri: 34.66.207.42
