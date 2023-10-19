@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,14 +15,9 @@ spec:
     spec:
       containers:
         - name: node
-          image: azacr4aks.azurecr.io/aks-deployment-node
+          image: raghuramdevopsengineer/node:4
           ports:
             - containerPort: 4000
-          # env:
-          #   - name: BACKEND_HOST
-          #     value: node-service
-      imagePullSecrets:
-        - name: aksdeployment
 
 ---
 apiVersion: v1
@@ -29,15 +25,15 @@ kind: Service
 metadata:
   name: node-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: node
   ports:
-    - port: 80
+    - protocol: TCP
+      port: 80
       targetPort: 4000
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -54,27 +50,26 @@ spec:
     spec:
       containers:
         - name: react
-          image: azacr4aks.azurecr.io/aks-deployment-react
+          image: raghuramdevopsengineer/react:4
           ports:
             - containerPort: 3000
-          # env:
-          #   - name: BACKEND_URL
-          #     value: node-service
-      imagePullSecrets:
-        - name: aksdeployment
+          env:
+            - name: SERVER_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: node-conf
+                  key: server-uri
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
   name: react-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: react
   ports:
     - protocol: TCP
       port: 3000
-      name: http
       targetPort: 3000
