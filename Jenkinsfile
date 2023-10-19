@@ -26,7 +26,7 @@ pipeline {
                 script {
                     // bat 'kubectl set image deployment/node-deployment node=raghuramdevopsengineer/react:${env.BUILD_NUMBER}'
                     // bat 'kubectl set image deployment/react-deployment react=raghuramdevopsengineer/node:${env.BUILD_NUMBER}'
-                    bat 'kubectl apply -f k8s-deployment.yaml'
+                    bat 'kubectl apply -f deployment.yaml'
                 }
             }
         }
