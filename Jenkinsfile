@@ -12,8 +12,8 @@ pipeline {
         stage('Push to Docker Hub') {
             steps {
                 script {
-                    // bat 'docker logout'
-                    // bat 'del C:\\Users\\raghuram\\.docker\\config.json'
+                    bat 'docker logout'
+                    bat 'del C:\\Users\\raghuram\\.docker\\config.json'
                     docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-authtoken') {
                         docker.image("raghuramdevopsengineer/react:${env.BUILD_NUMBER}").push()
                         docker.image("raghuramdevopsengineer/node:${env.BUILD_NUMBER}").push()
