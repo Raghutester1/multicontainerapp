@@ -16,9 +16,10 @@ spec:
       containers:
         - name: node
           image: raghuramdevopsengineer/node
+          imagePullPolicy: Always
           ports:
             - containerPort: 4000
-          imagePullPolicy: Always  
+          
 
 ---
 apiVersion: v1
@@ -52,6 +53,7 @@ spec:
       containers:
         - name: react
           image: raghuramdevopsengineer/react
+          imagePullPolicy: Always
           ports:
             - containerPort: 3000
           env:
@@ -60,7 +62,7 @@ spec:
                 configMapKeyRef:
                   name: node-conf
                   key: server-uri
-              imagePullPolicy: Always
+              
 ---
 apiVersion: v1
 kind: Service
