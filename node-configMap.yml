@@ -4,4 +4,4 @@ kind: ConfigMap
 metadata:
   name: node-conf
 data:
-  server-uri: 34.66.207.42
+  server-uri: 172.18.1.53
