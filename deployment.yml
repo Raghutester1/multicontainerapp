@@ -18,6 +18,7 @@ spec:
           image: raghuramdevopsengineer/node
           ports:
             - containerPort: 4000
+          imagePullPolicy: Always  
 
 ---
 apiVersion: v1
@@ -59,7 +60,7 @@ spec:
                 configMapKeyRef:
                   name: node-conf
                   key: server-uri
-
+              imagePullPolicy: Always
 ---
 apiVersion: v1
 kind: Service
